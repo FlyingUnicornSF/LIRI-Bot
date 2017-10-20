@@ -1,56 +1,127 @@
-// // Twitter
-//var keys = require("./keys.js");
-var Twitter = require('twitter');
-//var client = new Twitter(keys.twitterKeys);
-var client = new Twitter({
-  consumer_key: ' 9RirWMu6hbhBXDXK3D6G9rZw6',
-  consumer_secret: 'uCpsmLCXQPMfzNS2jtKkdU95VmT8HDan0ecMi3PDrb7rAfeSbn',
-  access_token_key: '920005219362074624-28sC26uf63qy0WQ3giXjUINH3dpoUb0',
-  access_token_secret: 'sYchVDQQDjBcDGlHakmQ0ybD0eRR9ggyKiDDbBft7eNVT',
-});
-console.log(client.options)
-
-var params = "FlyinginSF";
-
-
-var queryUrl = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name="+params+"&count=2";
-client.get(queryUrl, params, function(error, tweets, response) {
-  if (!error) {
-    console.log(response);
-  } else {
-    console.log(error);
-  }
-});
-
-
+var fs = require('fs');
 var request = require('request')
-var movieName = "Frozen"
-var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=40e9cece";
 
-request(queryUrl, function(error, response, body) {
-  if (error) {
-    return console.log('Error: ', error)
-  }
 
-  body = JSON.parse(body)
+// Twitter
+var keys = require("./keys.js");
+var Twitter = require('twitter');
+var client = new Twitter(keys.twitterKeys);
 
-  console.log(body.Year)
-})
+var params = {screen_name: 'FlyinginSF'};
+function clientGet() {
+  client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    if (!error) {
+      for(i = 0; i < 10; i++){
+      console.log(tweets[i].created_at);
+      fs.appendFile('log.txt', tweets[i].created_at + "\n", 'utf8', function(err){if (err) throw err;});
+      console.log(tweets[i].text);
+      fs.appendFile('log.txt', tweets[i].text + "\n", 'utf8', function(err){if (err) throw err;});
+      fs.appendFile('log.txt', "---------------------\n", 'utf8', function(err){if (err) throw err;});
+      };
+    } else {
+      console.log(error);
+    }
+  });
+}; // clientGet
 
+
+//Spotify
 var Spotify = require('node-spotify-api');
- 
-var spotify = new Spotify({
-  id: 'd5204c7352ac40fe9556d27558ed6a29',
-  secret: '8014df42ffe04ca49999c4af751e4627'
-});
- 
-spotify.search({ type: 'track', query: "I'll cover you" }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
+var spotify = new Spotify(keys.spotifyKeys);
+var song;
+function spotifySearch(input){
+  if (!input){
+    //if the song input in empty then assign "the Sign" to the song variable
+    song = "The Sign";
+  } else {
+    song = "'"+input+"'"; // add " " for search query
   }
-    //var jsonData = JSON.stringify(data, null, 2); 
-    //var jData = JSON.parse(data); 
-    console.log(data.tracks.items[2].artists[1].name)
+  spotify.search({ type: 'track', query: song, limit: 1}, function(err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    } else {
+      var albumInfo = data.tracks.items[0].album;
+      console.log("Artist(s): " + albumInfo.artists[0].name);
+      console.log("Album: " + albumInfo.name);
+      console.log("Song: " + data.tracks.items[0].name);
+      console.log("Url: " + albumInfo.external_urls.spotify);
+      //I'm sure ther is much prettier way to do this, but it's 11pm and I don't care. 
+      fs.appendFile('log.txt', "Artist(s): " + albumInfo.artists[0].name + "\n", 'utf8', function(err){if (err) throw err;});
+      fs.appendFile('log.txt', "Album: " + albumInfo.name + "\n", 'utf8', function(err){if (err) throw err;});
+      fs.appendFile('log.txt', "Song: " + data.tracks.items[0].name + "\n", 'utf8', function(err){if (err) throw err;});
+      fs.appendFile('log.txt', "Url: " + albumInfo.external_urls.spotify + "\n", 'utf8', function(err){if (err) throw err;});
+      fs.appendFile('log.txt', "---------------------\n", 'utf8', function(err){if (err) throw err;});
+    }
+  }); // spotify.search\
+};// spofitySearch
 
-});
+
+// Movie Search 
+function movieSearch(title){
+  // var input = process.argv[3]; //take first word into the movie name 
+  if (!title){
+    // if movie search is empty then set movieName to "mr nobody"
+    var movieName = "Mr. Nobody";
+  } else {
+    var movieName = title;
+  }
+  var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=40e9cece";
+  request(queryUrl, function(error, response, body) {
+    if (error) {
+      return console.log('Error: ', error)
+    } else {
+      body = JSON.parse(body);
+      console.log("Title: " + body.Title );
+      console.log("Year: " + body.Year);
+      console.log("imdb Rating:: " + body.imdbRating);
+      console.log("Rotten Tomato Rating: " + body.Ratings[1].Value);
+      console.log("Country: " + body.Country);
+      console.log("Language: " + body.Language);
+      console.log("Plot: " + body.Plot);
+      console.log("Actors: " + body.Actors); 
+      //I'm sure ther is much prettier way to do this, but it's 11pm and I don't care. 
+      fs.appendFile('log.txt', "Title: " + body.Title + "\n" + "Year: " + body.Year + "\n" + "imdb Rating:: " + body.imdbRating + "\n" + "Rotten Tomato Rating: " + body.Ratings[1].Value + "\n" + "Country: " + body.Country + "\n" + "Language: " + body.Language + "\n" + "Plot: " + body.Plot + "\n" + "Actors: " + body.Actors + "\n",  'utf8', function(err){if (err) throw err;});
+      fs.appendFile('log.txt', "---------------------\n", 'utf8', function(err){if (err) throw err;});
+    }
+  }); // request
+}; //movieSearch
+
+var input; //are these in the right spot? 
+var command = process.argv[2]
+function commandFunction(command){
+  // I have to say this is really crazy thing I did here. 
+  // if the input hasn't created from the random.text file, 
+  // meaning it's not a looped back from "do what it says"
+  // then create the input from process.argv
+
+  if(!input){
+    input = process.argv[3] //take the first word into the songInput
+    for(i = 4; i < process.argv.length; i++){
+      input += " " + process.argv[i]; //construct song name with spaces between words 
+    } // closing for
+  }
+
+  if (command === "my-tweets"){
+    clientGet();
+  } else if (command === "spotify-this-song"){
+    spotifySearch(input);
+  } else if (command === "movie-this"){
+    movieSearch(input);
+  } else if (command === "do-what-it-says"){
+    fs.readFile('random.txt', 'utf8', function(err, data) {  
+      if (err) throw err;
+      //take string from the text file and make commands and input
+      var str = data;
+      var pos = str.search(",");
+      var res = str.slice(0, pos);
+      input = str.slice(pos+1, str.length) // creating input here from the random text file 
+      command = res;
+      commandFunction(command); //i wonder if this counts as recursion
+    });
+  }
+  fs.appendFile('log.txt', command + "\n", 'utf8', function(err){if (err) throw err;});
+}; //commandFunction
+
+commandFunction(command);
+
 

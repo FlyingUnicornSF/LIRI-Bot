@@ -1,0 +1,54 @@
+my-tweets
+Wed Oct 18 23:09:50 +0000 2017
+tweet 10!!! 🤡
+Wed Oct 18 23:09:37 +0000 2017
+tweet 9
+Wed Oct 18 23:09:33 +0000 2017
+tweet 8
+Wed Oct 18 23:09:20 +0000 2017
+tweet 7
+Wed Oct 18 23:09:12 +0000 2017
+tweet 6
+Mon Oct 16 19:18:43 +0000 2017
+tweet 5
+Mon Oct 16 19:18:38 +0000 2017
+tweet 4
+Mon Oct 16 19:18:33 +0000 2017
+tweet 3
+Mon Oct 16 19:18:29 +0000 2017
+tweet 2
+Mon Oct 16 19:18:24 +0000 2017
+tweet one
+do-what-it-says
+spotify-this-song
+spotify-this-song
+spotify-this-song
+Album: Sign of the Times
+Artist(s): Harry Styles
+Song: Sign of the Times
+Url: https://open.spotify.com/album/6YDkzHVTEzMXZOVd1r5NqR
+movie-this
+Title: Frozen
+Year: 2013
+imdb Rating:: 7.5
+Rotten Tomato Rating: 89%
+Country: USA
+Language: English, Icelandic
+Plot: When the newly crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter, her sister, Anna, teams up with a mountain man, his playful reindeer, and a snowman to change the weather condition.
+Actors: Kristen Bell, Idina Menzel, Jonathan Groff, Josh Gad
+movie-this
+Title: Kung Fu Panda
+Year: 2008
+imdb Rating:: 7.6
+Rotten Tomato Rating: 87%
+Country: USA
+Language: English
+Plot: The Dragon Warrior has to clash against the savage Tai Lung as China's fate hangs in the balance: However, the Dragon Warrior mantle is supposedly mistaken to be bestowed upon an obese panda who is a tyro in martial arts.
+Actors: Jack Black, Dustin Hoffman, Angelina Jolie, Ian McShane
+---------------------
+spotify-this-song
+Artist(s): Harry Styles
+Album: Sign of the Times
+Song: Sign of the Times
+Url: https://open.spotify.com/album/6YDkzHVTEzMXZOVd1r5NqR
+---------------------
