@@ -32,12 +32,22 @@ LIRI will display
   command: ```node liri.js do-what-it-says```
 
         *It runs spotify-this-song for "I Want it That Way," as follows the text in random.txt.
-
+- Liri also keep log of the output in log.txt.
 
 ## Code Example
+Use node-spotify-api (API library for the Spotify REST API) to search songs in Spofity
+```var Spotify = require('node-spotify-api');```
+```var spotify = new Spotify(keys.spotifyKeys);```
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
-
+To get movies 
+```  var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=40e9cece";
+  request(queryUrl, function(error, response, body) {
+    if (error) {
+      return console.log('Error: ', error)
+    } else {
+      body = JSON.parse(body); ```
+      
+      
 ## Motivation
 
 A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
