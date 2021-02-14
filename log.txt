@@ -52,3 +52,73 @@ Album: Sign of the Times
 Song: Sign of the Times
 Url: https://open.spotify.com/album/6YDkzHVTEzMXZOVd1r5NqR
 ---------------------
+my-tweets
+Wed Oct 18 23:09:50 +0000 2017
+tweet 10!!! 🤡
+---------------------
+Wed Oct 18 23:09:37 +0000 2017
+tweet 9
+---------------------
+Wed Oct 18 23:09:33 +0000 2017
+tweet 8
+---------------------
+Wed Oct 18 23:09:20 +0000 2017
+tweet 7
+---------------------
+Wed Oct 18 23:09:12 +0000 2017
+tweet 6
+---------------------
+Mon Oct 16 19:18:43 +0000 2017
+tweet 5
+---------------------
+Mon Oct 16 19:18:38 +0000 2017
+tweet 4
+---------------------
+Mon Oct 16 19:18:33 +0000 2017
+tweet 3
+---------------------
+Mon Oct 16 19:18:29 +0000 2017
+tweet 2
+---------------------
+Mon Oct 16 19:18:24 +0000 2017
+tweet one
+---------------------
+spotify-this-song
+Artist(s): Natalie Imbruglia
+Album: Left Of The Middle
+Song: Torn
+Url: https://open.spotify.com/album/6HOvWskl058duikMCVOLcW
+---------------------
+spotify-this-song
+Artist(s): Ty Dolla $ign
+Url: https://open.spotify.com/album/7Dj0aaKI4RpehMPqOu56mW
+Song: All The Time
+Album: Beach House 3
+---------------------
+movie-this
+Title: Mr. Nobody
+Year: 2009
+imdb Rating:: 7.9
+Rotten Tomato Rating: 66%
+Country: Belgium, Germany, Canada, France, USA, UK
+Language: English, Mohawk
+Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
+---------------------
+movie-this
+Title: Harry Potter and the Deathly Hallows: Part 2
+Year: 2011
+imdb Rating:: 8.1
+Rotten Tomato Rating: 96%
+Country: USA, UK
+Language: English
+Plot: Harry, Ron, and Hermione search for Voldemort's remaining Horcruxes in their effort to destroy the Dark Lord as the final battle rages on at Hogwarts.
+Actors: Ralph Fiennes, Michael Gambon, Alan Rickman, Daniel Radcliffe
+---------------------
+do-what-it-says
+spotify-this-song
+Artist(s): Backstreet Boys
+Album: The Hits--Chapter One
+Url: https://open.spotify.com/album/1NslKOZobWxINFaFkLol3r
+Song: I Want It That Way
+---------------------

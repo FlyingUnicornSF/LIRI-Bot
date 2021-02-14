@@ -1,5 +1,5 @@
 var fs = require('fs');
-var request = require('request')
+var request = require('request') // try to stay consistent one way or the other with your semi-colon use 😬
 
 
 // Twitter
@@ -13,6 +13,14 @@ function clientGet() {
     if (!error) {
       for(i = 0; i < 10; i++){
       console.log(tweets[i].created_at);
+      // You call fs.appendFile a lot in this file and most all of it is repeated code
+      // so I'd suggest moving the bulk of that logic into it's own function like so:
+      // function appendFile( content ) {
+      //   fs.appendFile('log.txt', content, 'utf8', function(err){if (err) throw err;});
+      // }
+      // then you'd just need to run:
+      // append( tweets[i].created_at + "\n" )
+
       fs.appendFile('log.txt', tweets[i].created_at + "\n", 'utf8', function(err){if (err) throw err;});
       console.log(tweets[i].text);
       fs.appendFile('log.txt', tweets[i].text + "\n", 'utf8', function(err){if (err) throw err;});
@@ -28,8 +36,14 @@ function clientGet() {
 //Spotify
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotifyKeys);
+// this song variable is only used inside of the spotifySearch function
+// so I'd suggest declaring it inside of the function instead of out here
+// on the global scope
 var song;
 function spotifySearch(input){
+  // you could also use a ternary operator here:
+  // song = input ? ( "'"+input+"'" ) : "The Sign"
+
   if (!input){
     //if the song input in empty then assign "the Sign" to the song variable
     song = "The Sign";
@@ -40,6 +54,7 @@ function spotifySearch(input){
     if (err) {
       return console.log('Error occurred: ' + err);
     } else {
+      // Nice job assigning this deeply nested data to a more aptly named variable
       var albumInfo = data.tracks.items[0].album;
       console.log("Artist(s): " + albumInfo.artists[0].name);
       console.log("Album: " + albumInfo.name);
@@ -86,6 +101,8 @@ function movieSearch(title){
   }); // request
 }; //movieSearch
 
+// I think the command variable is in a fine spot since you're passing it to 
+// this function, but I'd probably just move the input variable inside the function.
 var input; //are these in the right spot? 
 var command = process.argv[2]
 function commandFunction(command){
@@ -94,6 +111,8 @@ function commandFunction(command){
   // meaning it's not a looped back from "do what it says"
   // then create the input from process.argv
 
+  // A more concise way to gather the trailing arguments as a string would be the following:
+  // input = process.argv.slice(3).join(' ')
   if(!input){
     input = process.argv[3] //take the first word into the songInput
     for(i = 4; i < process.argv.length; i++){
@@ -111,6 +130,13 @@ function commandFunction(command){
     fs.readFile('random.txt', 'utf8', function(err, data) {  
       if (err) throw err;
       //take string from the text file and make commands and input
+      // I don't really see any need to reassign data to str here - if you wanted
+      // the variable to be str, then you could have used it to name the second
+      // argument to your callback function. Also, you can use the `.split`
+      // method here like so:
+      // var command = str.split(',')[0]
+      // var input = str.split(',')[1]
+      // check out the doce here --> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
       var str = data;
       var pos = str.search(",");
       var res = str.slice(0, pos);
